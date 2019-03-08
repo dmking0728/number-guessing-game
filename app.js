@@ -20,16 +20,6 @@ const gameWrapper = document.querySelector('#game'),
       guessInput = document.querySelector('#guess-input'),
       message = document.querySelector('.message');
 
-// //claculates our random #
-//   function calcRandomNumber() {
-//     var randomNum = Math.floor((Math.random() * 10) + 1);
-//     parseInt(randomNum);
-//     return randomNum;
-//   }
-
-// //our random # is stored here
-//  var returnedRandomNum = calcRandomNumber();
- 
 
 //assign UI min and max
 minNum.textContent = min;

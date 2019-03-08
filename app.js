@@ -9,12 +9,14 @@
 //game values
 let min = 1,
     max = 10;
-    winningNum = 2,
+    winningNum = getRandomNum(min, max),
     guessesLeft = 3;
 
 //UI Elements we will be working with
-const game = document.querySelector('#game'),
+const gameWrapper = document.querySelector('#game'),
       guessBtn = document.querySelector('#guess-btn'),
+      minNum = document.querySelector('.min-num'),
+      maxNum = document.querySelector('.max-num')
       guessInput = document.querySelector('#guess-input'),
       message = document.querySelector('.message');
 
@@ -29,6 +31,17 @@ const game = document.querySelector('#game'),
 //  var returnedRandomNum = calcRandomNumber();
  
 
+//assign UI min and max
+minNum.textContent = min;
+maxNum.textContent = max;
+
+//play again event Listener
+gameWrapper.addEventListener('mousedown', function(e){
+  if(e.target.className === 'play-again'){
+    window.location.reload();
+  }
+});
+
 //Listen for guess
 guessBtn.addEventListener('click', function(){
   let guess = parseInt(guessInput.value);
@@ -41,11 +54,6 @@ guessBtn.addEventListener('click', function(){
   if(guess === winningNum){
     //game over - won
     gameOver(true, `${winningNum} is correct, you win!`, 'green');
-    // setMessage(`${winningNum} is correct, you win!`, 'green');
-    // //disable input
-    // guessInput.disabled = true;
-    // //change border color
-    // guessInput.style.borderColor = 'green'; 
   } else {
     //wrong number take away a guess
     guessesLeft -= 1;
@@ -77,7 +85,16 @@ function gameOver(won, msg){
     guessInput.style.borderColor = color;
     //set text color
     message.style.color = color;
+
+    //play again
+    guessBtn.value = 'Play Again';
+    guessBtn.className += 'play-again';   
   }
+
+//Get winning Num
+function getRandomNum(min, max){
+  return Math.floor(Math.floor(Math.random()*(max-min+1)+min));
+}
 
 //set message
 function setMessage(msg, color){
